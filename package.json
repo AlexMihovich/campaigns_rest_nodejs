@@ -1,0 +1,25 @@
+{
+  "name": "noderest",
+  "description": "Test REST API with Node",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node main"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "1.6.1"
+  },
+  "dependencies": {
+    "bluebird": "3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "4.16.2",
+    "mysql2": "^1.4.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.15.0",
+    "winston": "^3.0.0-rc1"
+  }
+}
