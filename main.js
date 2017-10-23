@@ -1,14 +1,22 @@
 import { logger } from './logger/winston';
+import { dbLog } from './database/mysql';
 
 var express = require('express');
 var app = express();
 
-// for valid POST requests processing
-var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+dbLog.sequelize.sync().then(() => {
 
-require('./routes')(app);
+    // for valid POST requests processing
+    var bodyParser = require('body-parser');
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(3001);
-logger.info('Listening on port 3001...');
+    require('./routes')(app);
+
+    app.listen(3001);
+    logger.info('Listening on port 3001...');
+
+});
+
+
+exports.app = app;

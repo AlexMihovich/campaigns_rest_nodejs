@@ -12,4 +12,15 @@ const sequelize = new Sequelize('test_logs', 'root', 'root', {
 
 let log = sequelize.import('./models/log');
 
-module.exports = { sequelize: sequelize, dbLog: log };
+function checkConnection() {
+return sequelize
+  .authenticate()
+  .then(() => {
+    return 'Connection has been established successfully.';
+  })
+  .catch(err => {
+    return 'Unable to connect to the database:';
+  });
+}
+
+module.exports = { sequelize: sequelize, dbLog: log, checkConnection: checkConnection};
