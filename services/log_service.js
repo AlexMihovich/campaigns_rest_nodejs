@@ -1,5 +1,5 @@
 import { Log } from '../models/log';
-import { dbLog } from '../database/mysql';
+import { dbLog } from '../database/database';
 import { logger } from '../logger/winston';
 
 const Sequelize = require('sequelize');
@@ -17,20 +17,21 @@ class LogService {
         logger.info('Creating new entry in database...');
         let new_log = new Log(req.body.campaign_id, req.body.app_id, req.body.old_bid, req.body.new_bid, req.body.ratio, req.body.create_at);
         dbLog.create(new_log, function(err, logs) {
-          if (err) return logger.error(err);
-          return res.send(logs);
+            if (err) return logger.error(err);
+            return res.send(logs);
         });
 
     }
 
     getLogsByCompanyId(req, res) {
         logger.info('Retrieving data from database...');
-        var id = req.params.id;
-        var logsList = [];
+        let id = req.params.id;
+        let logsList = [];
         dbLog.findAll({ where: { campaign_id: id } }).then(logs => {
-            logs.forEach(function(entry) {
+            logs.forEach((entry) => {
                 logsList.push(entry.dataValues);
             });
+            logList = logs.map(log => log.toJSON());
             res.send((logsList));
         });
     }
@@ -38,7 +39,7 @@ class LogService {
     createLog(log) {
         logger.info('Creating new entry in database...');
         return dbLog.create(log, function(err, logs) {
-          if (err) return logger.error(err);
+            if (err) return logger.error(err);
         });
     }
 }
