@@ -1,6 +1,9 @@
+import { config }  from '../config/testenv';
+let serviceConfig = config.Service;
+
 var rp = require('request-promise');
 
-var url = 'https://5cd3f999-f49f-4e42-8b8b-173c7185f093.mock.pstmn.io/campaigns';
+var url = serviceConfig.url;
 
 class CampaignSDK { 
 
