@@ -1,4 +1,4 @@
-let winston = require('winston')
+let winston = require('winston');
 
 const logger = winston.createLogger({
   level: 'info',

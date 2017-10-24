@@ -15,12 +15,16 @@ dbLog.sequelize.sync()
         logger.error('Database connection error: ', err.message);
     });
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 require('./routes')(app);
 
-app.listen(3001);
-logger.info('Listening on port 3001...');
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+
+app.listen(3002);
+logger.info('Listening on port 3002...');
 
 exports.app = app;

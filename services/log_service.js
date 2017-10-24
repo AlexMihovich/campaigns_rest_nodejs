@@ -31,7 +31,7 @@ class LogService {
             logs.forEach((entry) => {
                 logsList.push(entry.dataValues);
             });
-            logList = logs.map(log => log.toJSON());
+            logsList = logs.map(log => log.toJSON());
             res.send((logsList));
         });
     }

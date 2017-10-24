@@ -7,6 +7,8 @@ let campaignSDK = new CampaignSDK();
 
 class CampaignService {
 
+
+
     getCampaigns() {
         // returns list of campaigns
         return campaignSDK.getCampaigns()
@@ -14,7 +16,7 @@ class CampaignService {
                 return campaigns;
             })
             .catch(function(err) {
-                logger.debug('error get_camaigns request!');
+                logger.error('error get_camaigns request!', err);
             });
     }
 
@@ -22,12 +24,12 @@ class CampaignService {
         // returns list of campaign's stats
         return campaignSDK.getCampaignStats(campaignId)
             .catch(function(err) {
-                logger.debug('error get_camaign_stats request!');
+                logger.error('error get_camaign_stats request!', err);
             });
     }
 
     updateCampaignBid(campaignId, appId, bid) {
-        // send PUT request and updatese remote data
+        // updates remote data
         return campaignSDK.updateCampaignBid(campaignId, appId, bid);
     }
 
