@@ -5,7 +5,7 @@ import { logger } from '../logger/winston';
 let Promise = require('bluebird');
 
 
-exports.runResearch = () => {
+exports.ResearchService = () => {
     let cam_service = new CampaignService();
     let log_service = new LogService();
     cam_service.getCampaigns()

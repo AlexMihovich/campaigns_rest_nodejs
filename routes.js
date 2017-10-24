@@ -1,5 +1,5 @@
 import { LogService } from './services/log_service';
-var runs = require('./services/run');
+import { ResearchService } from './services/research_service';
 
 module.exports = function(app) {
     var log_service = new LogService();
@@ -9,5 +9,5 @@ module.exports = function(app) {
     app.get(`${baseUrl}/logs`, log_service.displayLogs);
     app.post(`${baseUrl}/log/insert`, log_service.createLogApi);
 
-    app.get(`${baseUrl}/run`, runs.runResearch);
+    app.get(`${baseUrl}/run`, ResearchService);
 };
