@@ -1,4 +1,4 @@
-import { config } from '../config/dev_env';
+import { config } from '../config/config';
 let serviceConfig = config.Service;
 
 let rp = require('request-promise');

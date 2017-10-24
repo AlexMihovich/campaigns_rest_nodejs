@@ -1,4 +1,4 @@
-import { config } from '../config/dev_env';
+import { config } from '../config/config';
 let dbConfig = config.User.dbConfig;
 
 const Sequelize = require('sequelize');

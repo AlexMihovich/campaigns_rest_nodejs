@@ -7,17 +7,32 @@ function dbLog(sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         old_bid: {
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
+            validate: {
+                isFloat: true
+            }
         },
         new_bid: {
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
+            validate: {
+                isFloat: true
+            }
         },
         ratio: {
-            type: DataTypes.FLOAT
+            type: DataTypes.FLOAT,
+            validate: {
+                isFloat: true
+            }
         },
         created_at: {
-            type: DataTypes.DATE
-        }
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            validate: {
+                isDate: true,
+                isAfter: "2017-01-01"
+            }
+
+        },
     });
 }
 

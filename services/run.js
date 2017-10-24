@@ -2,9 +2,10 @@ import { CampaignService } from './campaign_service';
 import { LogService } from './log_service';
 import { Log } from '../models/log';
 import { logger } from '../logger/winston';
+let Promise = require('bluebird');
 
 
-exports.runResearch = function(req, res) {
+exports.runResearch = () => {
 
     let cam_service = new CampaignService();
     let log_service = new LogService();
@@ -14,9 +15,10 @@ exports.runResearch = function(req, res) {
             return cam_service.validateCampaigns(campaigns);
         })
         .then((validCampaigns) => {
-            validCampaigns.forEach((campaign) => {
+            return Promise.map(validCampaigns, (campaign) => {
                 getStatsFromApi(campaign);
-            });
+
+            }, { concurrency: 1 });
         });
 
     function getStatsFromApi(campaign) {
@@ -26,11 +28,7 @@ exports.runResearch = function(req, res) {
                     logger.debug('Invalid request data');
                     throw new Error('Invalid request data!');
                 }
-
-                let filteredStats = stats.filter((stat) => {
-                    return stat.impressions / stat.opportunities < 0.5;
-                });
-                return filteredStats;
+                filterStatsByRatio(stats);
             })
             .then((filteredStats) => {
                 filteredStats.forEach((stat) => {
@@ -46,6 +44,13 @@ exports.runResearch = function(req, res) {
             .catch((err) => {
                 logger.debug('Invalid request data', err);
             });
+    }
+
+    function filterStatsByRatio(stats) {
+        let filteredStats = stats.filter((stat) => {
+            return stat.impressions / stat.opportunities < 0.5;
+        });
+        return Promise.resolve(filteredStats);
     }
 
 };

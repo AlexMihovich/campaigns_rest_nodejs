@@ -1,12 +1,13 @@
 import { LogService } from './services/log_service';
+var runs = require('./services/run');
 
 module.exports = function(app) {
-    var runs = require('./services/run');
     var log_service = new LogService();
+    let baseUrl = "/campaign";
 
-    app.get('/campaigns/logs/:id', log_service.getLogsByCompanyId);
-    app.get('/campaigns/logs', log_service.displayLogs);
-    app.post('/campaigns/log/insert', log_service.createLogApi);
+    app.get(`${baseUrl}/logs/:id`, log_service.getLogsByCompanyId);
+    app.get(`${baseUrl}/logs`, log_service.displayLogs);
+    app.post(`${baseUrl}/log/insert`, log_service.createLogApi);
 
-    app.get('/run', runs.runResearch);
+    app.get(`${baseUrl}/run`, runs.runResearch);
 };
