@@ -1,8 +1,8 @@
 import { config } from '../config/config';
 let serviceConfig = config.Service;
 
-let rp = require('request-promise');
 
+let rp = require('request-promise');
 let url = serviceConfig.url;
 
 class CampaignSDK {

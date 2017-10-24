@@ -7,8 +7,6 @@ let campaignSDK = new CampaignSDK();
 
 class CampaignService {
 
-
-
     getCampaigns() {
         // returns list of campaigns
         return campaignSDK.getCampaigns()
@@ -39,7 +37,6 @@ class CampaignService {
             return !!campaign.id;
         });
     }
-
 }
 
 exports.CampaignService = CampaignService;

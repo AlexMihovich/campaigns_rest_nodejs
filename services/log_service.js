@@ -1,8 +1,8 @@
 import { Log } from '../models/log';
 import { dbLog } from '../database/database';
 import { logger } from '../logger/winston';
-
 const Sequelize = require('sequelize');
+
 
 class LogService {
 
@@ -20,7 +20,6 @@ class LogService {
             if (err) return logger.error(err);
             return res.send(logs);
         });
-
     }
 
     getLogsByCompanyId(req, res) {

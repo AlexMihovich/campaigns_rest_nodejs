@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./routes')(app);
 
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
 })
 
 app.listen(3002);

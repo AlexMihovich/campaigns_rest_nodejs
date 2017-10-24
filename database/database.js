@@ -1,6 +1,7 @@
 import { config } from '../config/config';
 let dbConfig = config.User.dbConfig;
 
+
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(dbConfig.dbname, dbConfig.login, dbConfig.password, {
     host: dbConfig.host,

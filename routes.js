@@ -1,6 +1,7 @@
 import { LogService } from './services/log_service';
 import { ResearchService } from './services/research_service';
 
+
 module.exports = function(app) {
     var log_service = new LogService();
     let baseUrl = "/campaign";
